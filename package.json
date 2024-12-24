@@ -1,32 +1,36 @@
 {
-  "name": "uptime",
-  "private": true,
-  "version": "0.0.1",
-  "description": "Encore Uptime Monitoring Tutorial",
-  "license": "MPL-2.0",
-  "type": "module",
-  "scripts": {
-    "test": "vitest"
-  },
-  "devDependencies": {
-    "@types/luxon": "^3.0.1",
-    "@types/node": "^20.5.7",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "typescript": "^5.2.2",
-    "vitest": "^1.2.2"
-  },
-  "dependencies": {
-    "@headlessui/react": "^1.7.2",
-    "@heroicons/react": "^2.0.11",
-    "@tanstack/react-query": "^5.31.0",
-    "encore.dev": "^1.45.2",
-    "luxon": "^3.0.4",
-    "next": "14.2.2",
-    "react": "^18",
-    "react-dom": "^18"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.13.0"
-  }
+	"name": "uptime",
+	"private": true,
+	"version": "0.0.1",
+	"description": "Encore Uptime Monitoring Tutorial",
+	"license": "MPL-2.0",
+	"type": "module",
+	"scripts": {
+		"test": "vitest",
+		"build": "encore build docker --base=node:18-slim --config ./infra-config.json --arch arm64 --trace ./build.log -v uptime:v2.0",
+		"run": "docker run --platform linux/arm64/v8 -d -e DB_PASSWORD=test -p 8080:8080 --name encore-uptime uptime:v2.0"
+	},
+	"devDependencies": {
+		"@types/luxon": "^3.0.1",
+		"@types/node": "^20.5.7",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"typescript": "^5.2.2",
+		"vitest": "^1.2.2"
+	},
+	"dependencies": {
+		"@headlessui/react": "^1.7.2",
+		"@heroicons/react": "^2.0.11",
+		"@tanstack/react-query": "^5.31.0",
+		"encore.dev": "^1.45.2",
+		"knex": "^3.1.0",
+		"luxon": "^3.0.4",
+		"next": "14.2.2",
+		"pg": "^8.13.1",
+		"react": "^18",
+		"react-dom": "^18"
+	},
+	"optionalDependencies": {
+		"@rollup/rollup-linux-x64-gnu": "^4.13.0"
+	}
 }

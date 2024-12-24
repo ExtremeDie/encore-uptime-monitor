@@ -1,0 +1,36 @@
+{
+	"$schema": "https://encore.dev/schemas/infra.schema.json",
+	"sql_servers": [
+		{
+			"host": "my-db-host:5432",
+			"databases": {
+				"monitor": {
+					"username": "my-db-owner",
+					"password": { "$env": "DB_PASSWORD" }
+				},
+				"site": {
+					"username": "my-db-owner",
+					"password": { "$env": "DB_PASSWORD" }
+				}
+			}
+		}
+	],
+	"pubsub": [
+		{
+			"type": "aws_sns_sqs",
+			"topics": {
+				"uptime-transition": {
+					"arn": "arn:aws:sns:ap-southeast-1:000000000000:uptime-transition",
+					"subscriptions": {
+						"slack-notification": {
+							"arn": "arn:aws:sqs:ap-southeast-1:000000000000:slack-notification"
+						}
+					}
+				}
+			}
+		}
+	],
+	"secrets": {
+		"SlackWebhookURL": { "$env": "SlackWebhookURL" }
+	}
+}
